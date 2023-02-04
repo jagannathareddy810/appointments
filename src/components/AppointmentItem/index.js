@@ -1,37 +1,32 @@
-// Write your code here
 import './index.css'
 
-const AppointmentItem = props => {
-  const {appointmentList, toggleFavorite} = props
+const AppointmentIem = props => {
+  const {appointmentDetails, toggleIsStarred} = props
+  const {id, title, date, isStarred} = appointmentDetails
+  const starImgUrl = isStarred
+    ? 'https://assets.ccbp.in/frontend/react-js/appointments-app/filled-star-img.png'
+    : 'https://assets.ccbp.in/frontend/react-js/appointments-app/star-img.png'
 
-  const {id, names, dates, isFavorite} = appointmentList
-  const starImgUrl = isFavorite
-    ? 'https://assets.ccbp.in/frontend/react-js/appointments-app/star-img.png'
-    : 'https://assets.ccbp.in/frontend/react-js/appointments-app/filled-star-img.png'
-
-  const onClickFavoriteIcon = () => {
-    toggleFavorite(id)
+  const onClickStar = () => {
+    toggleIsStarred(id)
   }
 
   return (
-    <li className="appointment-item" key={id}>
-      <div className="content-holder">
-        <div className="sub-holder">
-          <h1 className="username">{names}</h1>
-          <p className="time-now">{dates}</p>
-        </div>
-        <div className="star-container">
-          <button
-            type="button"
-            className="favorite-icon-container"
-            onClick={onClickFavoriteIcon}
-            data-testid="star"
-          >
-            <img src={starImgUrl} className="favorite-icon" alt="star" />
-          </button>
-        </div>
+    <li className="appointment-item">
+      <div className="header-container">
+        <p className="title">{title}</p>
+        <button
+          type="button"
+          data-testid="star"
+          className="star-button"
+          onClick={onClickStar}
+        >
+          <img src={starImgUrl} className="star" alt="star" />
+        </button>
       </div>
+      <p className="date">Date: {date}</p>
     </li>
   )
 }
-export default AppointmentItem
+
+export default AppointmentIem
